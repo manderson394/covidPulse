@@ -127,6 +127,12 @@
         <version>${jersey-version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.glassfish.jersey.containers</groupId>
+        <artifactId>jersey-container-servlet</artifactId>
+        <version>${jersey-version}</version>
+      </dependency>
+
       <!-- Next 3 dependencies are for Jackson -->
       <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
       <dependency>
