@@ -1,17 +1,36 @@
 package edu.matc.covidPulse.controller;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//@Path("/counties")
+@Path("/counties")
 public class CountyService {
 
-    // TODO getAllCountiesData with optional date constraints
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllCountiesData(
+            @QueryParam("startDate") String startDate,
+            @QueryParam("endDate") String endDate) {
 
-    // TODO getCountyData with optional date constraints
+        String data = "{\"counties\": [{\"55025\": \"name\": \"Dane\", \"state\": \"WI\", [{\"date\": \"2020-03-30\", "
+        + "\"cases\": \"100\"}]},{\"55079\": \"name\": \"Milwaukee\", \"state\": \"WI\", [{\"date\": \"2020-03-30\", "
+        + "\"cases\": \"600\"}]}]}";
 
-    // NOTE: Feel free to try hardcoding one in JSON, but I don't think it's required at this point.
+        return Response.status(200).entity(data).build();
+    }
+
+    @GET
+    @Path("/{countyFipsCode}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getCountyData(
+            @PathParam("countyFipsCode") String countyFipsCode,
+            @QueryParam("startDate") String startDate,
+            @QueryParam("endDate") String endDate) {
+
+        String data = "{\"55025\": \"name\": \"Dane\", \"state\": \"WI\", [{\"date\": \"2020-03-30\", "
+        + "\"cases\": \"100\"}]}]}";
+
+        return Response.status(200).entity(data).build();
+    }
 }
