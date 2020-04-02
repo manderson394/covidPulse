@@ -142,6 +142,9 @@ in the US, so that this crucial data can be easily integrated into any applicati
  
 * **Error Response:**
 
+  * **Code:** 422 UNPROCESSABLE ENTRY <br />
+    **Content:** `{ error : "Unable to process your request at this time." }`
+
 * **Sample Call:**
 
   /api/states
