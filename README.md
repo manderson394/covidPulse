@@ -9,7 +9,18 @@ that software developers can use to programmatically access COVID-19 case counts
 in the US, so that this crucial data can be easily integrated into any application.
 
 ### Project Plan
+A Minimum Viable Product (MVP) will consist of giving a user the ability to get JSON data from the API using 
+endpoints. These endpoints will allow the user to get information based on URL parameters passed for a county 
+or state with a date range. If no parameters are passed then the county and state endpoints will return JSON 
+data containing all of the cases for all of the counties, states, and nation.
 
+- Database [ERG Diagram](https://github.com/)
+- All County Cases Endpoint 
+- All County Cases Endpoint with Date Range
+- All State Cases Endpoint 
+- All State Cases Endpoint with Date Range
+- All National Cases Endpoint
+- All National Cases Endpoint with Date Range
 
 ### Endpoint Documentation
 
@@ -148,3 +159,4 @@ in the US, so that this crucial data can be easily integrated into any applicati
 * **Sample Call:**
 
   /api/states
+  /api/states/startDate=03-30-2020&endDate=03-31-2020
