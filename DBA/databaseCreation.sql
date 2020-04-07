@@ -37,18 +37,18 @@ create unique index COUNTY_FIPS_fips_code_uindex
 
 ### Generate States Table
 
-create table STATE_COVID_DATA
-(
-    id int auto_increment,
-    date datetime null,
-    state_fips_code int null,
-    cases int null,
-    deaths int null,
-    constraint STATE_COVID_DATA_pk
-        primary key (id),
-    constraint STATE_COVID_DATA_STATE_FIPS_fips_code_fk
-        foreign key (state_fips_code) references STATE_FIPS (fips_code)
-);
+# create table STATE_COVID_DATA
+# (
+#     id int auto_increment,
+#     date datetime null,
+#     state_fips_code int null,
+#     cases int null,
+#     deaths int null,
+#     constraint STATE_COVID_DATA_pk
+#         primary key (id),
+#     constraint STATE_COVID_DATA_STATE_FIPS_fips_code_fk
+#         foreign key (state_fips_code) references STATE_FIPS (fips_code)
+# );
 
 
 ### Generate Counties Tables
