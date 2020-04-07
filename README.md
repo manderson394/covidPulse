@@ -50,7 +50,22 @@ data containing all of the cases for all of the counties, states, and nation.
 
   * **Code:** 200 <br />
     **Content:** <br />
-        {"55025": "name": "Dane", "state": "WI", [{"date": "2020-03-30", "cases": "100"}]}]}
+     ```json
+        {
+            "counties": [
+                {
+                    "55025": [
+                        {
+                            "name": "Dane", 
+                            "state": "WI", 
+                            "date": "2020-03-30", 
+                            "cases": "100"
+                        }
+                    ]
+                }
+            ]
+        }
+     ```
  
 * **Error Response:**
 
