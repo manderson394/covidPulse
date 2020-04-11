@@ -11,12 +11,11 @@ USE covid_pulse;
 ### Generate County FIPS Table
 create table COUNTY_FIPS
 (
-    id int auto_increment,
     name varchar(255) null,
     fips_code int null,
     state char(2),
     constraint COUNTY_FIPS_pk
-        primary key (id)
+        primary key (fips_code)
 );
 
 create unique index COUNTY_FIPS_fips_code_uindex
