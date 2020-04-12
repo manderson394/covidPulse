@@ -8,33 +8,14 @@ USE covid_pulse;
 
 ### Generate Tables
 
-### Generate State FIPS Table
-create table STATE_FIPS
-(
-    id int auto_increment,
-    name varchar(255) null,
-    postal_code varchar(255) null,
-    fips_code int null,
-    constraint STATE_FIPS_pk
-        primary key (id)
-);
-
-create unique index STATE_FIPS_fips_code_uindex
-    on STATE_FIPS (fips_code);
-
 ### Generate County FIPS Table
 create table COUNTY_FIPS
 (
-    id int auto_increment,
     name varchar(255) null,
-<<<<<<< Updated upstream
-    fips_code int null,
-=======
     fips_code int not null,
     state char(2),
->>>>>>> Stashed changes
     constraint COUNTY_FIPS_pk
-        primary key (id)
+        primary key (fips_code)
 );
 
 create unique index COUNTY_FIPS_fips_code_uindex
