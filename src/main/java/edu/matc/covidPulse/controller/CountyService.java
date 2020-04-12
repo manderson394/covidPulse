@@ -38,17 +38,12 @@ public class CountyService {
         status = 200;
 
         try {
-            String data = mapper.writeValueAsString(counties);
+            data = mapper.writeValueAsString(counties);
         } catch (JsonProcessingException jsonException) {
             log.error("Could not process object into JSON :" + counties);
             data = "{ error: \"Unable to process your request at this time.\" }";
             status = 422;
         }
-
-//        String data = "{\"counties\": [{\"55025\": \"name\": \"Dane\", \"state\": \"WI\", [{\"date\": \"2020-03-30\", "
-//        + "\"cases\": \"100\"}]},{\"55079\": \"name\": \"Milwaukee\", \"state\": \"WI\", [{\"date\": \"2020-03-30\", "
-//        + "\"cases\": \"600\"}]}]}";
-
 
         return Response.status(status).entity(data).build();
     }
@@ -61,40 +56,50 @@ public class CountyService {
             @QueryParam("startDate") String startDate,
             @QueryParam("endDate") String endDate) {
 
-        String data = "{\"55025\": \"name\": \"Dane\", \"state\": \"WI\", [{\"date\": \"2020-03-30\", "
-        + "\"cases\": \"100\"}]}]}";
+        countyCovidDao = new GenericDao<>(CountyCovidData.class);
+
+        List<CountyCovidData> counties = getCountyResults(countyFipsCode, startDate, endDate);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        status = 200;
+
+        try {
+            data = mapper.writeValueAsString(counties);
+        } catch (JsonProcessingException jsonException) {
+            log.error("Could not process object into JSON :" + counties);
+            data = "{ error: \"Unable to process your request at this time.\" }";
+            status = 422;
+        }
 
         return Response.status(200).entity(data).build();
     }
 
     private List<CountyCovidData> getCountyResults(String fipsCode, String start, String end) {
-        int fipsInt = Integer.valueOf(fipsCode);
-        LocalDateTime startDateTime = convertToLocalDateTime(start);
-        LocalDateTime endDateTime = convertToLocalDateTime(end);
+        LocalDate startDateTime = convertToLocalDateTime(start);
+        LocalDate endDateTime = convertToLocalDateTime(end);
 
         if (fipsCode.isEmpty()) {
             return getAllFips(startDateTime, endDateTime);
         } else {
-            return getOneFips(fipsInt, startDateTime, endDateTime);
+            return getOneFips(fipsCode, startDateTime, endDateTime);
         }
     }
 
-    private List<CountyCovidData> getAllFips(LocalDateTime startDT, LocalDateTime endDT) {
-
-        //TODO how do we want to handle start and end? In SQL or in Java? Probably SQL
-
+    private List<CountyCovidData> getAllFips(LocalDate startDT, LocalDate endDT) {
+        return countyCovidDao.getByRange("date", startDT, endDT);
     }
 
-    private List<CountyCovidData> getOneFips(int fipsInteger, LocalDateTime startDT, LocalDateTime endDT) {
-
+    private List<CountyCovidData> getOneFips(String fipsInteger, LocalDate startDT, LocalDate endDT) {
+        return countyCovidDao.getByRangeTwoParam("date", startDT, endDT, "fipsCode", fipsInteger);
     }
 
-    private LocalDateTime convertToLocalDateTime (String date) {
+    private LocalDate convertToLocalDateTime (String date) {
         String delim = "[-]";
         String[] pieces = date.split(delim);
         int year = Integer.valueOf(pieces[2]);
         int month = Integer.valueOf(pieces[0]);
         int day = Integer.valueOf(pieces[1]);
-        return LocalDateTime.of(year, month, day, 0, 0);
+        return LocalDate.of(year, month, day);
     }
 }
