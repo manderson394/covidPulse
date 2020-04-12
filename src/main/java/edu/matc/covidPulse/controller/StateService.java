@@ -1,32 +1,49 @@
 package edu.matc.covidPulse.controller;
 
+import edu.matc.covidPulse.entity.StateCovidRecord;
+import edu.matc.covidPulse.entity.StateResponse;
+import edu.matc.covidPulse.persistence.GenericDao;
+import edu.matc.covidPulse.transformer.StateDataTransformer;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/states")
 public class StateService {
+    private GenericDao dao;
+
+    public StateService() {
+        dao = new GenericDao(StateCovidRecord.class);
+    }
+
     @GET
     @Produces("application/json")
     public Response getAllStatesData(@QueryParam("startDate") String startDate, @QueryParam("endDate") String endDate) {
-        String data = "{\"states\": [{\"WI\": [{\"date\": \"2020-03-30\", \"cases\": \"1200\"}]},{\"MN\": [{\"date\": \"2020-03-30\", \"cases\": \"600\"}]}]}";
-
+        List<StateCovidRecord> data = new ArrayList<>();
         if (startDate != null || endDate != null) {
-            data = "{\"This will show cases from\": \"" + startDate + " to " + endDate + "\"}";
+            // restrict data returned
+        } else {
+            data = dao.getAll();
         }
 
-        return Response.status(200).entity(data).build();
+        List<StateResponse> responseBody = StateDataTransformer.from(data);
+
+        return Response.status(200).entity(responseBody).build();
     }
 
     @GET
     @Path("/{state}")
     @Produces("text/plain")
     public Response getOneStateData(@PathParam("state") String state, @QueryParam("startDate") String startDate, @QueryParam("endDate") String endDate) {
-        String data = "This will be data for the state of " + state;
-
         if (startDate != null || endDate != null) {
-            data += " from " + startDate + " to " + endDate;
+            // restrict data
         }
 
-        return Response.status(200).entity(data).build();
+        List<StateCovidRecord> data = dao.getByPropertyLike("state", state);
+        List<StateResponse> responseBody = StateDataTransformer.from(data);
+
+        return Response.status(200).entity(responseBody).build();
     }
 }
