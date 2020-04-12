@@ -27,7 +27,12 @@ create table COUNTY_FIPS
 (
     id int auto_increment,
     name varchar(255) null,
+<<<<<<< Updated upstream
     fips_code int null,
+=======
+    fips_code int not null,
+    state char(2),
+>>>>>>> Stashed changes
     constraint COUNTY_FIPS_pk
         primary key (id)
 );

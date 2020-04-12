@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -122,11 +123,11 @@ public class GenericDao<T> {
      * @param entity the entity
      * @return the int
      */
-    public int insert(T entity) {
-        int id = 0;
+    public String insert(T entity) {
+        String id = null;
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        id = (int)session.save(entity);
+        id = (String)session.save(entity);
         transaction.commit();
         session.close();
         return id;
@@ -143,5 +144,53 @@ public class GenericDao<T> {
         session.delete(entity);
         transaction.commit();
         session.close();
+    }
+
+    /**
+     * Gets by a date range.
+     *
+     * @param rangeProperty the range property
+     * @param lowerBound    the lower bound
+     * @param upperBound    the upper bound
+     * @return the by range
+     */
+    public List<T> getByRange(String rangeProperty, LocalDate lowerBound, LocalDate upperBound) {
+        Session session = sessionFactory.openSession();
+        logger.debug("Searching on {} with bounds on {}: Lower: {}, Upper: {}.", type,
+                rangeProperty, lowerBound, upperBound);
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        Expression<LocalDate> rangePropertyPath = root.get(rangeProperty);
+        query.where(builder.between(rangePropertyPath, lowerBound, upperBound));
+        List<T> entities = session.createQuery( query ).getResultList();
+        session.close();
+        return entities;
+    }
+
+    /**
+     * Gets by a date range and an additional criteria that is equal to a value.
+     *
+     * @param rangeProperty the range property
+     * @param lowerBound    the lower bound
+     * @param upperBound    the upper bound
+     * @param propertyTwo   the property two
+     * @param valueTwo      the value two
+     * @return the by range two param
+     */
+    public List<T> getByRangeTwoParam(String rangeProperty, LocalDate lowerBound, LocalDate upperBound, String propertyTwo, Object valueTwo) {
+        Session session = sessionFactory.openSession();
+        logger.debug("Searching on {} with bounds on {}: Lower: {}, Upper: {}, & {} equal to {}.", type,
+                rangeProperty, lowerBound, upperBound, propertyTwo, valueTwo);
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        Expression<LocalDate> rangePropertyPath = root.get(rangeProperty);
+        Expression<String> propertyTwoPath = root.get(propertyTwo);
+        query.where(builder.between(rangePropertyPath, lowerBound, upperBound),
+                builder.equal(propertyTwoPath, valueTwo));
+        List<T> entities = session.createQuery( query ).getResultList();
+        session.close();
+        return entities;
     }
 }

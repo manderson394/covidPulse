@@ -4,8 +4,10 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
+@Entity(name = "CountyCovidData")
+@Table(name = "COUNTY_COVID_DATA")
 @Data
 public class CountyCovidData {
 
@@ -14,7 +16,7 @@ public class CountyCovidData {
     @GenericGenerator(name = "native", strategy = "native")
     private int id;
 
-    private LocalDateTime date;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "county_fips_code", referencedColumnName = "fips_code")
@@ -23,4 +25,5 @@ public class CountyCovidData {
     private int cases;
 
     private int deaths;
+
 }
