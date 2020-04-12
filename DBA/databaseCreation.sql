@@ -12,7 +12,7 @@ USE covid_pulse;
 create table COUNTY_FIPS
 (
     name varchar(255) null,
-    fips_code int null,
+    fips_code int not null,
     state char(2),
     constraint COUNTY_FIPS_pk
         primary key (fips_code)

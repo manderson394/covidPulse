@@ -212,6 +212,11 @@
                 <artifactId>junit-platform-surefire-provider</artifactId>
                 <version>${junit-platform-runner-version}</version>
               </dependency>
+              <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${jupiter-version}</version>
+              </dependency>
             </dependencies>
           </plugin>
         </plugins>
@@ -226,6 +231,10 @@
         </resource>
         <resource>
           <directory>src/main/webapp/META-INF</directory>
+          <filtering>true</filtering>
+        </resource>
+        <resource>
+          <directory>src/test/resources</directory>
           <filtering>true</filtering>
         </resource>
       </resources>
