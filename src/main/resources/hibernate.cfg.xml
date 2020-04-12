@@ -18,6 +18,7 @@
 
         <mapping class="edu.matc.covidPulse.entity.CountyFips"/>
         <mapping class="edu.matc.covidPulse.entity.CountyCovidData"/>
+        <mapping class="edu.matc.covidPulse.entity.StateCovidRecord"/>
 
 
     </session-factory>
