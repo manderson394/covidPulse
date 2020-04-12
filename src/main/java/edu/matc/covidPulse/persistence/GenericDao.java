@@ -127,7 +127,7 @@ public class GenericDao<T> {
         String id = null;
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        id = (String)session.save(entity);
+        id = session.save(entity).toString();
         transaction.commit();
         session.close();
         return id;

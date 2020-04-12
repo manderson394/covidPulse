@@ -1,9 +1,6 @@
 package edu.matc.covidPulse.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,12 +10,12 @@ import java.util.Set;
 
 @Entity(name = "CountyFips")
 @Table(name = "COUNTY_FIPS")
+@Data
 public class CountyFips {
 
     @Id
     @Column(name = "fips")
     @NotNull
-    @Getter
     private String fips;
 
     @NotNull
@@ -28,6 +25,7 @@ public class CountyFips {
     private String state;
 
     @OneToMany(mappedBy = "fipsCode", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, orphanRemoval = false, fetch = FetchType.LAZY)
+    @Getter
     private Set<CountyCovidData> covidDataSet;
 
 

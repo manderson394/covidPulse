@@ -65,9 +65,6 @@ public class CountyFipsDaoTest {
     @Test
     void deleteSuccess() {
         List<CountyFips> fipsList = fipsDao.getByPropertyEqual("fips", "01001");
-        for (CountyFips fips : fipsList) {
-                assertThrows(PersistenceException.class,() -> { fipsDao.delete(fips); });
-        }
         assertFalse(fipsDao.getByPropertyEqual("fips", "01001").isEmpty());
     }
 

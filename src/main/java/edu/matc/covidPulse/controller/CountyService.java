@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.matc.covidPulse.entity.CountyCovidData;
+import edu.matc.covidPulse.entity.CountyFips;
 import edu.matc.covidPulse.persistence.GenericDao;
 import lombok.extern.log4j.Log4j2;
 
@@ -32,6 +33,7 @@ public class CountyService {
 
         List<CountyCovidData> counties = getCountyResults(null, startDate, endDate);
 
+        log.debug("Counties found: {}", counties);
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -50,8 +52,8 @@ public class CountyService {
 
     @GET
     @Path("/{countyFipsCode}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getCountyData(
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CountyCovidData> getCountyData(
             @PathParam("countyFipsCode") String countyFipsCode,
             @QueryParam("startDate") String startDate,
             @QueryParam("endDate") String endDate) {
@@ -60,19 +62,23 @@ public class CountyService {
 
         List<CountyCovidData> counties = getCountyResults(countyFipsCode, startDate, endDate);
 
-        ObjectMapper mapper = new ObjectMapper();
+        log.debug("Counties found: {}", counties);
 
-        status = 200;
+//        ObjectMapper mapper = new ObjectMapper();
+//
+//        status = 200;
+//
+//        try {
+//            data = mapper.writeValueAsString(counties);
+//        } catch (JsonProcessingException jsonException) {
+//            log.error("Could not process object into JSON :" + counties);
+//            data = "{ error: \"Unable to process your request at this time.\" }";
+//            status = 422;
+//        }
+//
+//        return Response.status(200).entity(data).build();
 
-        try {
-            data = mapper.writeValueAsString(counties);
-        } catch (JsonProcessingException jsonException) {
-            log.error("Could not process object into JSON :" + counties);
-            data = "{ error: \"Unable to process your request at this time.\" }";
-            status = 422;
-        }
-
-        return Response.status(200).entity(data).build();
+        return counties;
     }
 
     private List<CountyCovidData> getCountyResults(String fipsCode, String start, String end) {
@@ -90,8 +96,10 @@ public class CountyService {
         return countyCovidDao.getByRange("date", startDT, endDT);
     }
 
-    private List<CountyCovidData> getOneFips(String fipsInteger, LocalDate startDT, LocalDate endDT) {
-        return countyCovidDao.getByRangeTwoParam("date", startDT, endDT, "fipsCode", fipsInteger);
+    private List<CountyCovidData> getOneFips(String fips, LocalDate startDT, LocalDate endDT) {
+        GenericDao<CountyFips> fipsDao = new GenericDao<>(CountyFips.class);
+        List<CountyFips> fipsList = fipsDao.getByPropertyEqual("fips", fips);
+        return countyCovidDao.getByRangeTwoParam("date", startDT, endDT, "fipsCode", fipsList.get(0));
     }
 
     private LocalDate convertToLocalDateTime (String date) {

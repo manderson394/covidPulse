@@ -3,6 +3,7 @@ package edu.matc.covidPulse.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,11 +15,13 @@ import java.util.Objects;
 @Table(name = "COUNTY_COVID_DATA")
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class CountyCovidData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
+    @Setter
     private int id;
 
     @NotNull

@@ -3,7 +3,6 @@ package edu.matc.covidPulse.persistence;
 import edu.matc.covidPulse.entity.CountyCovidData;
 import edu.matc.covidPulse.entity.CountyFips;
 import edu.matc.covidPulse.test.util.Database;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CountyCovidDataDaoTest {
+class CountyCovidDataDaoTest {
 
     private GenericDao<CountyCovidData> countyCovidDao;
     private CountyCovidData expectedCountyCovid;
@@ -68,10 +67,11 @@ public class CountyCovidDataDaoTest {
         CountyCovidData newCountyCovid = new CountyCovidData(999999999,
                 LocalDate.of(2020, 12, 23), expectedFips, 23, 23, "Test County", "Not a State");
         int insertId = Integer.valueOf(countyCovidDao.insert(newCountyCovid));
+        newCountyCovid.setId(insertId);
         CountyCovidData actualCountyCovid = countyCovidDao.getById(insertId);
 
         assertNotNull(actualCountyCovid);
-        assertEquals(expectedCountyCovid, actualCountyCovid);
+        assertEquals(newCountyCovid, actualCountyCovid);
 
 
 
@@ -93,7 +93,7 @@ public class CountyCovidDataDaoTest {
      */
     @Test
     void getByPropertyLikeSuccess() {
-        List<CountyCovidData> countyCovidList = countyCovidDao.getByPropertyLike("fipsCode", "53061");
+        List<CountyCovidData> countyCovidList = countyCovidDao.getByPropertyLike("state", "Washington");
         assertFalse(countyCovidList.isEmpty());
     }
 
