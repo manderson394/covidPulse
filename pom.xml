@@ -212,6 +212,11 @@
                 <artifactId>junit-platform-surefire-provider</artifactId>
                 <version>${junit-platform-runner-version}</version>
               </dependency>
+              <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${jupiter-version}</version>
+              </dependency>
             </dependencies>
           </plugin>
         </plugins>

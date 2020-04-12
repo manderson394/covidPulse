@@ -1,6 +1,7 @@
 package edu.matc.covidPulse.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +18,7 @@ public class CountyFips {
     @Id
     @Column(name = "fips")
     @NotNull
+    @Getter
     private String fips;
 
     @NotNull
@@ -46,6 +48,10 @@ public class CountyFips {
         this.name = name;
         this.state = state;
         this.covidDataSet = covidDataSet;
+    }
+
+    public void addCountyCovidData(CountyCovidData countyCovidData) {
+        covidDataSet.add(countyCovidData);
     }
 
     @Override

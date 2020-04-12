@@ -1,15 +1,13 @@
 package edu.matc.covidPulse.persistence;
 
-import edu.matc.covidPulse.entity.CountyCovidData;
 import edu.matc.covidPulse.entity.CountyFips;
 import edu.matc.covidPulse.test.util.Database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
+import javax.persistence.PersistenceException;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,9 +47,9 @@ public class CountyFipsDaoTest {
      */
     @Test
     void insertSuccess() {
-        CountyFips newFips = new CountyFips("99999999", "Test", "AK", new HashSet<>());
+        CountyFips newFips = new CountyFips("99999", "Test", "AK", new HashSet<>());
         String insertFips = fipsDao.insert(newFips);
-        List<CountyFips> fipsList = fipsDao.getByPropertyEqual("fips", "99999999");
+        List<CountyFips> fipsList = fipsDao.getByPropertyEqual("fips", "99999");
 
         for (CountyFips actualFips : fipsList) {
             assertNotNull(actualFips);
@@ -68,9 +66,9 @@ public class CountyFipsDaoTest {
     void deleteSuccess() {
         List<CountyFips> fipsList = fipsDao.getByPropertyEqual("fips", "01001");
         for (CountyFips fips : fipsList) {
-            fipsDao.delete(fips);
+                assertThrows(PersistenceException.class,() -> { fipsDao.delete(fips); });
         }
-        assertTrue(fipsDao.getByPropertyEqual("fips", "01001").isEmpty());
+        assertFalse(fipsDao.getByPropertyEqual("fips", "01001").isEmpty());
     }
 
     /**
@@ -90,10 +88,5 @@ public class CountyFipsDaoTest {
         List<CountyFips> allFips = fipsDao.getAll();
         assertFalse(allFips.isEmpty());
         assertEquals(3143, allFips.size());
-    }
-
-    @Test
-    void getByRangeTwoParamSuccess() {
-
     }
 }
