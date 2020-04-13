@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class StateDataItem {
 
 	@JsonProperty("date")
-	private LocalDate date;
+	private String date;
 
 	@JsonProperty("cases")
 	private int cases;
@@ -15,11 +15,11 @@ public class StateDataItem {
 	@JsonProperty("deaths")
 	private int deaths;
 
-	public void setDate(LocalDate date){
+	public void setDate(String date){
 		this.date = date;
 	}
 
-	public LocalDate getDate(){
+	public String getDate(){
 		return date;
 	}
 
@@ -43,7 +43,7 @@ public class StateDataItem {
  	public String toString(){
 		return 
 			"DataItem{" + 
-			"date = '" + date + '\'' + 
+			"date = '" + date + '\'' +
 			",cases = '" + cases + '\'' + 
 			",deaths = '" + deaths + '\'' + 
 			"}";

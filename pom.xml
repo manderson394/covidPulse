@@ -155,6 +155,7 @@
         <version>${jackson-version}</version>
       </dependency>
     </dependencies>
+
     <!-- Configure profiles since deploying in more than one environment -->
     <profiles>
       <profile>
