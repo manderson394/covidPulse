@@ -38,6 +38,8 @@
 
 # Log files
 /logs/
+/src/main/resources/log4j2.properties
+/src/test/resources/log4j2.properties
 
 # Password containing files
 /src/test/resources/api.properties
@@ -59,3 +61,10 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+.classpath
+.factorypath
+.project
+.settings/org.eclipse.core.resources.prefs
+.settings/org.eclipse.jdt.apt.core.prefs
+.settings/org.eclipse.jdt.core.prefs

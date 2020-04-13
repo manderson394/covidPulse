@@ -172,6 +172,24 @@
     </profiles>
 
     <build>
+      <filters>
+        <filter>profiles/${profile.name}.properties</filter>
+      </filters>
+      <resources>
+        <resource>
+          <directory>src/main/resources</directory>
+          <filtering>true</filtering>
+        </resource>
+        <resource>
+          <directory>src/main/webapp/META-INF</directory>
+          <filtering>true</filtering>
+        </resource>
+        <resource>
+          <directory>src/test/resources</directory>
+          <filtering>true</filtering>
+        </resource>
+      </resources>
+
       <finalName>covidPulse</finalName>
       <pluginManagement>
         <plugins>
@@ -221,23 +239,8 @@
           </plugin>
         </plugins>
       </pluginManagement>
-      <filters>
-        <filter>profiles/${profile.name}.properties</filter>
-      </filters>
-      <resources>
-        <resource>
-          <directory>src/main/resources</directory>
-          <filtering>true</filtering>
-        </resource>
-        <resource>
-          <directory>src/main/webapp/META-INF</directory>
-          <filtering>true</filtering>
-        </resource>
-        <resource>
-          <directory>src/test/resources</directory>
-          <filtering>true</filtering>
-        </resource>
-      </resources>
+
+
     </build>
   </project>
 
