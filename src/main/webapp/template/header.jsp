@@ -29,9 +29,22 @@
     <div class="row collapse navbar-collapse my-2" id="navbarsExampleDefault">
         <div class="col-md-2 d-flex justify-content-start align-items-center"></div>
         <div id="searchDiv" class="col-md-8">
-            <form class="row my-2 mx-2">
-                <input class="col-9 form-control" type="text" placeholder="Search" aria-label="Search">
-                <button class="col-3 form-control btn btn-secondary" type="submit">Search</button>
+            <form action="./" class="row my-2 mx-2 form-inline" method="post">
+                <label for="geographic">Geographic: </label>
+                <select id="geographic" name="geographic">
+                    <option value="counties">County</option>
+                    <option value="states">State</option>
+                </select>
+
+                <input class="form-control" id="searchBox" name="searchBox" type="text" placeholder="Enter County FIPS or State Abbreviation" value="53061" aria-label="Search">
+
+                <label for="startDate">Start Date: </label>
+                <input type="date" class="form-control" id="startDate" name="startDate" value="2020-03-01" min="2019-01-01" max="2020-12-31" />
+                <label for="endDate">End Date: </label>
+                <input type="date" class="form-control" id="endDate" name="endDate" value="2020-03-30" min="2019-01-01" max="2020-12-31" />
+
+                <button class="form-control btn btn-secondary" type="submit">Search</button>
+
             </form>
         </div>
         <div class="col-md-2 d-flex justify-content-end align-items-center"></div>

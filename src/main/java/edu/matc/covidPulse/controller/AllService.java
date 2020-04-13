@@ -20,29 +20,31 @@ import java.util.*;
 @Transactional
 public class AllService {
 
-    private GenericDao countyFipsDao;
+    //private GenericDao countyFipsDao;
     private GenericDao countyCovidDataDao;
+    ObjectMapper mapper;
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    public AllService() {  }
+    public AllService() {
+        countyCovidDataDao = new GenericDao<>(CountyCovidData.class);
+        mapper = new ObjectMapper();
+    }
 
     @GET
-    @Path("/")
     @Produces("application/json")
     public Response getAllData() {
 
-        countyFipsDao = new GenericDao(CountyFips.class);
-        countyCovidDataDao = new GenericDao(CountyCovidData.class);
+        //countyFipsDao = new GenericDao(CountyFips.class);
 
         List<CountyCovidData> countyCovidDataList = countyCovidDataDao.getAll();
 
         String json = "";
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
+
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            json = mapper.writeValueAsString(countyCovidDataList);
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(countyCovidDataList);
         }
         catch (JsonProcessingException e) {
             logger.error(e.getMessage());
