@@ -31,7 +31,7 @@ public class CountyDataTransformer {
                 map.replace(countyName, countyResponse);
 
             } else {
-                CountyResponse newResponse = new CountyResponse(countyName, data.getFipsCode().getFips());
+                CountyResponse newResponse = new CountyResponse(data.getFipsCode().getFips(), countyName);
                 addCountyDataItemToMap(countyItem, newResponse);
                 map.put(countyName, newResponse);
             }

@@ -31,20 +31,20 @@ public class CountyService {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
     public Response getAllCountiesData(
             @QueryParam("startDate") String startDate,
             @QueryParam("endDate") String endDate) {
 
 
-        List<CountyCovidData> counties = getCountyResults(null, startDate, endDate);
+        List<CountyCovidData> counties = getCountyResults("", startDate, endDate);
 
         log.debug("Counties found: {}", counties);
 
         List<CountyResponse> data = CountyDataTransformer.convertFrom(counties);
 
         try{
-            response = mapper.writeValueAsString(data);
+            response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
             log.debug(response);
             status = 200;
         } catch (JsonProcessingException jsonException) {
@@ -58,7 +58,7 @@ public class CountyService {
 
     @GET
     @Path("/{countyFipsCode}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
     public Response getCountyData(
             @PathParam("countyFipsCode") String countyFipsCode,
             @QueryParam("startDate") String startDate,
@@ -71,7 +71,7 @@ public class CountyService {
         List<CountyResponse> data = CountyDataTransformer.convertFrom(counties);
 
         try{
-            response = mapper.writeValueAsString(data);
+            response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
             log.debug(response);
             status = 200;
         } catch (JsonProcessingException jsonException) {
@@ -84,8 +84,13 @@ public class CountyService {
     }
 
     private List<CountyCovidData> getCountyResults(String fipsCode, String start, String end) {
-        LocalDate startDateTime = convertToLocalDateTime(start);
-        LocalDate endDateTime = convertToLocalDateTime(end);
+        LocalDate startDateTime = null;
+        LocalDate endDateTime = null;
+
+        if ((start != null) && (end != null)) {
+            startDateTime = convertToLocalDateTime(start);
+            endDateTime = convertToLocalDateTime(end);
+        }
 
         if (fipsCode.isEmpty()) {
             return getAllFips(startDateTime, endDateTime);
@@ -107,9 +112,9 @@ public class CountyService {
         List<CountyFips> fipsList = fipsDao.getByPropertyEqual("fips", fips);
 
         if ((startDT != null) && (endDT != null)) {
-            return countyCovidDao.getByPropertyEqual("fipsCode", fips);
-        } else {
             return countyCovidDao.getByRangeTwoParam("date", startDT, endDT, "fipsCode", fipsList.get(0));
+        } else {
+            return countyCovidDao.getByPropertyEqual("fipsCode", fipsList.get(0));
         }
     }
 
