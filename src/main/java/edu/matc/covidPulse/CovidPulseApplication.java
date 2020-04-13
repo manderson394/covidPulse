@@ -1,6 +1,5 @@
 package edu.matc.covidPulse;
 
-import edu.matc.covidPulse.controller.AllService;
 import edu.matc.covidPulse.controller.CountyService;
 import edu.matc.covidPulse.controller.StateService;
 
@@ -16,7 +15,6 @@ public class CovidPulseApplication extends Application {
         HashSet h = new HashSet<Class<?>>();
         h.add(StateService.class);
         h.add(CountyService.class);
-        h.add(AllService.class);
         return h;
     }
 }
