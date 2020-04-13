@@ -3,13 +3,16 @@ package edu.matc.covidPulse.transformer;
 import edu.matc.covidPulse.entity.StateCovidRecord;
 import edu.matc.covidPulse.entity.StateDataItem;
 import edu.matc.covidPulse.entity.StateResponse;
+import lombok.extern.log4j.Log4j2;
 
 import javax.swing.plaf.nimbus.State;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Log4j2
 public class StateDataTransformer {
     public static List<StateResponse> from(List<StateCovidRecord> stateCovidRecords) {
         Map<String, StateResponse> responseItems = mapRecordsToStateResponseItems(stateCovidRecords);
@@ -41,10 +44,13 @@ public class StateDataTransformer {
             }
         }
 
+        log.debug(responseItems);
         return responseItems;
     }
 
     private static void addDataItemToResponse(StateDataItem dataItem, StateResponse responseItem) {
+        log.debug(dataItem);
+        log.debug(responseItem);
         List<StateDataItem> currentStateData = responseItem.getData();
         currentStateData.add(dataItem);
         responseItem.setData(currentStateData);
@@ -52,7 +58,7 @@ public class StateDataTransformer {
 
     private static StateDataItem generateDataItem(StateCovidRecord record) {
         StateDataItem dataItem = new StateDataItem();
-        dataItem.setDate(record.getDate());
+        dataItem.setDate(record.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
         dataItem.setCases(record.getCases());
         dataItem.setDeaths(record.getDeaths());
         return dataItem;

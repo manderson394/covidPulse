@@ -1,5 +1,6 @@
 package edu.matc.covidPulse.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,6 +14,10 @@ public class StateResponse {
 
 	@JsonProperty("state_fips")
 	private String stateFips;
+
+	public StateResponse() {
+		data = new ArrayList<>();
+	}
 
 	public void setData(List<StateDataItem> data){
 		this.data = data;
