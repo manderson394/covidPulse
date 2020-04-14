@@ -40,14 +40,36 @@
             access COVID-19 case counts by county and state in the US, so that this crucial data can be easily integrated
             into any application.</p>
 
+        <p>
+            The data from this service is in JSON format (examples below). Each object in the
+            "data" array represents the cumulative confirmed cases and deaths reported on that date.
+        </p>
+
+        <p>
+            Huge thanks to the NYTimes for providing the raw data. It can be found <a href="https://github.com/nytimes/covid-19-data">here</a>.
+        </p>
+
+        <p>
+            <b>Base URL: </b><kbd>http://3.21.91.2:8080/covidPulse/api</kbd>
+        </p>
+
         <h2>County Lookups</h2>
 
         <h3>All Cases</h3>
-        <p>Use this endpoint to obtain COVID-19 case data from all states and counties.</p>
+        <p>Use this endpoint to obtain COVID-19 case data from US counties.</p>
+        <p>Geographic Exceptions</p>
+        <ul>
+            <li>Boroughs of New York City, NY are not included, as these were lumped together and have no FIPS code</li>
+            <li>Cass, Clay, Jackson, and Platte counties (MO) have counts exclusive of Kansas City.</li>
+            <li>Counts for Alameda County, CA include cases and deaths from Berkeley and the Grand Princess cruise ship</li>
+            <li>Counts for Douglas County, NE include cases brought to the state from the Diamond Princess cruise ship.</li>
+            <li>Chicago counts are included as part of Cook county</li>
+            <li>Any cases reported with an Unknown FIPS code are not included</li>
+        </ul>
 
         <h4>URL</h4>
 
-        <kbd>/api/counties?startDate=<var>startDate</var>&endDate=<var>endDate</var></kbd>
+        <kbd>/counties?startDate=<var>startDate</var>&endDate=<var>endDate</var></kbd>
 
         <h4>Request Method:</h4>
 
@@ -57,8 +79,8 @@
 
         <strong>Optional:</strong><br />
 
-        <var>startDate</var> = <code>String</code> - <em class="example">Example: yyyy-MM-dd</em><br />
-        <var>endDate</var> = <code>String</code> - <em class="example">Example: yyyy-MM-dd</em>
+        <var>startDate</var> = <code>String</code> - <em class="example">REQUIRED FORMAT: yyyy-MM-dd</em><br />
+        <var>endDate</var> = <code>String</code> - <em class="example">REQUIRED FORMAT: yyyy-MM-dd</em>
 
 
         <h4>Success Response:</h4>
@@ -92,7 +114,7 @@
         </code>
 
         <h4>Error Response:</h4>
-        <strong>Status Code:</strong> <code>422 UNPROCESSABLE ENTRY</code><br />
+        <strong>Status Code:</strong> <code>500 Internal Server Error</code><br />
         <strong>Response Type:</strong> <code>JSON</code>
 
         <code>
@@ -104,16 +126,21 @@
 
         <h4>Sample Call:</h4>
 
-        <kbd>/api/counties</kbd><br />
-        <kbd>/api/counties/startDate=03-30-2020&endDate=03-31-2020</kbd>
+        <kbd>/counties</kbd><br />
+        <kbd>/counties/startDate=2020-03-30&endDate=2020-03-31</kbd>
 
 
         <h3 class="mt-5">Specific County</h3>
-        <p>Use this endpoint to obtain COVID-19 case data for a specific county.</p>
+        <p>
+            Use this endpoint to obtain COVID-19 case data for a specific county.
+            Counties must be fetched by their 5-digit FIPS code (2-digit state + 3-digit county).
+            See <a href="https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html">2018 FIPS Codes</a>
+            for more information
+        </p>
 
         <h4>URL</h4>
 
-        <kbd>/api/counties/<var>fipsCountyId</var>?startDate=<var>startDate</var>&endDate=<var>endDate</var></kbd>
+        <kbd>/counties/<var>fipsCountyId</var>?startDate=<var>startDate</var>&endDate=<var>endDate</var></kbd>
 
         <h4>Request Method:</h4>
 
@@ -123,9 +150,9 @@
 
         <strong>Optional:</strong><br />
 
-        <var>fipsCountyId</var> = <code>Integer</code> - <em class="example">Example: 123</em><br />
-        <var>startDate</var> = <code>String</code> - <em class="example">Example: yyyy-MM-dd</em><br />
-        <var>endDate</var> = <code>String</code> - <em class="example">Example: yyyy-MM-dd</em>
+        <var>fipsCountyId</var> = <code>Integer</code> - <em class="example">REQUIRED FORMAT: 12345</em><br />
+        <var>startDate</var> = <code>String</code> - <em class="example">REQUIRED FORMAT: yyyy-MM-dd</em><br />
+        <var>endDate</var> = <code>String</code> - <em class="example">REQUIRED FORMAT: yyyy-MM-dd</em>
 
 
         <h4>Success Response:</h4>
@@ -153,30 +180,30 @@
         </code>
 
         <h4>Error Response:</h4>
-        <strong>Status Code:</strong> <code>422 UNPROCESSABLE ENTRY</code><br />
+        <strong>Status Code:</strong> <code>500 Internal Server Error</code><br />
         <strong>Response Type:</strong> <code>JSON</code>
 
         <code>
             {
-            error : "Invalid FIPS ID"
+            error : "Unable to process your request at this time."
             }
         </code>
 
 
         <h4>Sample Call:</h4>
 
-        <kbd>/api/counties/55025?startDate=03-30-2020&endDate=03-31-2020</kbd>
+        <kbd>/counties/55025?startDate=2020-03-30&endDate=2020-03-31</kbd>
 
 
 
         <h2 class="mt-5">State Lookups</h2>
 
         <h3>All Cases</h3>
-        <p>Use this endpoint to obtain COVID-19 case data from all states.</p>
+        <p>Use this endpoint to obtain COVID-19 case data from every state.</p>
 
         <h4>URL</h4>
 
-        <kbd>/api/states?startDate=<var>startDate</var>&endDate=<var>endDate</var></kbd>
+        <kbd>/states?startDate=<var>startDate</var>&endDate=<var>endDate</var></kbd>
 
         <h4>Request Method:</h4>
 
@@ -186,8 +213,8 @@
 
         <strong>Optional:</strong><br />
 
-        <var>startDate</var> = <code>String</code> - <em class="example">Example: yyyy-MM-dd</em><br />
-        <var>endDate</var> = <code>String</code> - <em class="example">Example: yyyy-MM-dd</em>
+        <var>startDate</var> = <code>String</code> - <em class="example">REQUIRED FORMAT: yyyy-MM-dd</em><br />
+        <var>endDate</var> = <code>String</code> - <em class="example">REQUIRED FORMAT: yyyy-MM-dd</em>
 
 
         <h4>Success Response:</h4>
@@ -231,7 +258,7 @@
         </code>
 
         <h4>Error Response:</h4>
-        <strong>Status Code:</strong> <code>422 UNPROCESSABLE ENTRY</code><br />
+        <strong>Status Code:</strong> <code>500 Internal Server Error</code><br />
         <strong>Response Type:</strong> <code>JSON</code>
 
         <code>
@@ -243,16 +270,17 @@
 
         <h4>Sample Call:</h4>
 
-        <kbd>/api/states</kbd><br />
-        <kbd>/api/states/startDate=03-30-2020&endDate=03-31-2020</kbd>
+        <kbd>/states</kbd><br />
+        <kbd>/states?startDate=2020-03-30&endDate=2020-03-31</kbd>
 
 
         <h3 class="mt-5">Specific State</h3>
-        <p>Use this endpoint to obtain COVID-19 case data for a specific state.</p>
+        <p>Use this endpoint to obtain COVID-19 case data for a specific state. States must be referenced
+        by their 2-letter abbreviation, in capital letters.</p>
 
         <h4>URL</h4>
 
-        <kbd>/api/states/<var>state</var>?startDate=<var>startDate</var>&endDate=<var>endDate</var></kbd>
+        <kbd>/states/<var>state</var>?startDate=<var>startDate</var>&endDate=<var>endDate</var></kbd>
 
         <h4>Request Method:</h4>
 
@@ -262,9 +290,9 @@
 
         <strong>Optional:</strong><br />
 
-        <var>state</var> = <code>String</code> - <em class="example">Example: WI</em><br />
-        <var>startDate</var> = <code>String</code> - <em class="example">Example: yyyy-MM-dd</em><br />
-        <var>endDate</var> = <code>String</code> - <em class="example">Example: yyyy-MM-dd</em>
+        <var>state</var> = <code>String</code> - <em class="example">REQUIRED FORMAT: WI</em><br />
+        <var>startDate</var> = <code>String</code> - <em class="example">REQUIRED FORMAT: yyyy-MM-dd</em><br />
+        <var>endDate</var> = <code>String</code> - <em class="example">REQUIRED FORMAT: yyyy-MM-dd</em>
 
 
         <h4>Success Response:</h4>
@@ -287,19 +315,19 @@
         </code>
 
         <h4>Error Response:</h4>
-        <strong>Status Code:</strong> <code>422 UNPROCESSABLE ENTRY</code><br />
+        <strong>Status Code:</strong> <code>500 Internal Server Error</code><br />
         <strong>Response Type:</strong> <code>JSON</code>
 
         <code>
             {
-            error : "State must be identified by it's two-character abbreviation"
+            error : "Unable to process your request at this time."
             }
         </code>
 
 
         <h4>Sample Call:</h4>
 
-        <kbd>/api/states/WI?startDate=03-30-2020&endDate=03-31-2020</kbd>
+        <kbd>/states/WI?startDate=2020-03-30&endDate=2020-03-31</kbd>
 
     </section>
 
