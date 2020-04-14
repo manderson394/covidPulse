@@ -14,13 +14,28 @@ endpoints. These endpoints will allow the user to get information based on URL p
 or state with a date range. If no parameters are passed then the county and state endpoints will return JSON 
 data containing all of the cases for all of the counties, states, and nation.
 
-- Database [ERG Diagram](https://github.com/)
+- Database 
 - All County Cases Endpoint 
 - All County Cases Endpoint with Date Range
 - All State Cases Endpoint 
 - All State Cases Endpoint with Date Range
-- All National Cases Endpoint
-- All National Cases Endpoint with Date Range
+
+### Hosted service
+User guide: http://3.21.91.2:8080/covidPulse/ <br>
+API: http://3.21.91.2:8080/covidPulse/api
+
+### Consumed Data
+https://github.com/nytimes/covid-19-data
+
+### Tech List
+* MySQL
+* Hibernate
+* Hibernate Validator
+* Lombok
+* Jackson
+* JAX-RS
+* JUnit
+* Maven w/ Profiles
 
 ### Endpoint Documentation
 
