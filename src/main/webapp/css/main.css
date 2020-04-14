@@ -8,10 +8,22 @@ Blue
   Hex: #012d6b
   RGB: (1,45,107)
  */
-body {}
 
 body {
-    padding-top: 5rem;
+    background-color: #ccc;
+}
+
+p, code {
+    margin-bottom: 1em;
+}
+
+h4 {
+    margin-top: 1em;
+}
+
+.example {
+    color: #555;
+    font-size: 90%;
 }
 
 .fa, .fas, .far {
@@ -19,8 +31,7 @@ body {
 }
 
 main {
-    padding: 3rem 1.5rem;
-    text-align: center;
+    padding: 5rem 2rem;
 }
 
 nav {
@@ -35,6 +46,11 @@ nav, footer {
 
 footer {
     box-shadow: 0 -5px 5px #aaa;
+}
+
+
+code {
+    white-space: pre;
 }
 
 .btn-primary {

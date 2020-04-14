@@ -25,7 +25,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon mb-1"></span>
     </button>
-
+    <!--
     <div class="row collapse navbar-collapse my-2" id="navbarsExampleDefault">
         <div class="col-md-2 d-flex justify-content-start align-items-center"></div>
         <div id="searchDiv" class="col-md-8">
@@ -49,6 +49,7 @@
         </div>
         <div class="col-md-2 d-flex justify-content-end align-items-center"></div>
     </div>
+    -->
 </nav>
 
 
