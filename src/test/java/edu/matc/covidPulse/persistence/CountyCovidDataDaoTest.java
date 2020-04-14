@@ -108,12 +108,12 @@ class CountyCovidDataDaoTest {
      */
     @Test
     void getByRangeSuccess() {
-        LocalDate startDate = LocalDate.of(2020, 1, 21);
-        LocalDate endDate = LocalDate.of(2020, 1, 24);
+        String startDate = "2020-01-21";
+        String endDate = "2020-01-24";
 
-//        List<CountyCovidData> countyCovidList = countyCovidDao.getByRange("date", startDate, endDate);
+        List<CountyCovidData> countyCovidList = countyCovidDao.getByRange("date", startDate, endDate);
 
-//        assertEquals(5, countyCovidList.size());
+        assertEquals(5, countyCovidList.size());
     }
 
     /**
@@ -121,12 +121,12 @@ class CountyCovidDataDaoTest {
      */
     @Test
     void getByRangeTwoParam() {
-        LocalDate startDate = LocalDate.of(2020, 1, 21);
-        LocalDate endDate = LocalDate.of(2020, 1, 24);
+        String startDate = "2020-01-21";
+        String endDate = "2020-01-24";
 
-//        List<CountyCovidData> countyCovidList = countyCovidDao.getByRangeTwoParam("date", startDate,
-//                endDate, "fipsCode", expectedFips);
-//
-//        assertEquals(4, countyCovidList.size());
+        List<CountyCovidData> countyCovidList = countyCovidDao.getByRangeTwoParam("date", startDate,
+                endDate, "fipsCode", expectedFips);
+
+        assertEquals(4, countyCovidList.size());
     }
 }
