@@ -104,14 +104,6 @@ public class CountyService {
     }
 
     private List<CountyCovidData> getCountyResults(String fipsCode, String start, String end) {
-//        LocalDate startDateTime = null;
-//        LocalDate endDateTime = null;
-//
-//        if ((start != null) && (end != null)) {
-//            startDateTime = convertToLocalDateTime(start);
-//            endDateTime = convertToLocalDateTime(end);
-//        }
-
         if (fipsCode.isEmpty()) {
             return getAllFips(start, end);
         } else {
@@ -136,11 +128,5 @@ public class CountyService {
         } else {
             return countyCovidDao.getByPropertyEqual("fipsCode", fipsList.get(0));
         }
-    }
-
-    private LocalDate convertToLocalDateTime (String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-
-        return LocalDate.parse(date, formatter);
     }
 }
