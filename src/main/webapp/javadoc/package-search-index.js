@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"edu.matc.covidPulse"},{"l":"edu.matc.covidPulse.controller"},{"l":"edu.matc.covidPulse.entity"},{"l":"edu.matc.covidPulse.persistence"},{"l":"edu.matc.covidPulse.servlet"},{"l":"edu.matc.covidPulse.transformer"}]

@@ -66,28 +66,28 @@
         <strong>Response Type:</strong> <code>JSON</code><br />
         <code>
             [
-            {
-            "county_fips": "53061",
-            "county": "Snohomish",
-            "data": [
-            {
-            "date": "2020-02-29",
-            "cases": 2,
-            "deaths": 0
-            }
-            ]
-            },
-            {
-            "county_fips": "53719",
-            "county": "Dane",
-            "data": [
-            {
-            "date": "2020-03-01",
-            "cases": 3,
-            "deaths": 0
-            }
-            ]
-            }
+                {
+                    "county_fips": "53061",
+                    "county": "Snohomish",
+                    "data": [
+                        {
+                            "date": "2020-02-29",
+                            "cases": 2,
+                            "deaths": 0
+                        }
+                    ]
+                },
+                {
+                    "county_fips": "53719",
+                    "county": "Dane",
+                    "data": [
+                        {
+                            "date": "2020-03-01",
+                            "cases": 3,
+                            "deaths": 0
+                        }
+                    ]
+                }
             ]
         </code>
 
@@ -133,22 +133,22 @@
         <strong>Response Type:</strong> <code>JSON</code><br />
         <code>
             [
-            {
-            "county_fips": "53061",
-            "county": "Snohomish",
-            "data": [
-            {
-            "date": "2020-02-29",
-            "cases": 2,
-            "deaths": 0
-            },
-            {
-            "date": "2020-03-01",
-            "cases": 3,
-            "deaths": 0
-            }
-            ]
-            }
+                {
+                    "county_fips": "53061",
+                    "county": "Snohomish",
+                    "data": [
+                        {
+                            "date": "2020-02-29",
+                            "cases": 2,
+                            "deaths": 0
+                        },
+                        {
+                            "date": "2020-03-01",
+                            "cases": 3,
+                            "deaths": 0
+                        }
+                    ]
+                }
             ]
         </code>
 
@@ -195,28 +195,38 @@
         <strong>Response Type:</strong> <code>JSON</code><br />
         <code>
             [
-            {
-            "county_fips": "53061",
-            "county": "Snohomish",
-            "data": [
-            {
-            "date": "2020-02-29",
-            "cases": 2,
-            "deaths": 0
-            }
-            ]
-            },
-            {
-            "county_fips": "53719",
-            "county": "Dane",
-            "data": [
-            {
-            "date": "2020-03-01",
-            "cases": 3,
-            "deaths": 0
-            }
-            ]
-            }
+                {
+                    "state": "HI",
+                    "state_fips": "15",
+                    "data": [
+                        {
+                            "date": "2020-03-06",
+                            "cases": 1,
+                            "deaths": 0
+                        },
+                        {
+                            "date": "2020-02-05",
+                            "cases": 1,
+                            "deaths": 0
+                        }
+                    ]
+                },
+                {
+                    "state": "WI",
+                    "state_fips": "55",
+                    "data": [
+                        {
+                            "date": "2020-02-05",
+                            "cases": 1,
+                            "deaths": 0
+                        },
+                        {
+                            "date": "2020-03-06",
+                            "cases": 1,
+                            "deaths": 0
+                        }
+                    ]
+                }
             ]
         </code>
 
@@ -262,22 +272,17 @@
         <strong>Response Type:</strong> <code>JSON</code><br />
         <code>
             [
-            {
-            "county_fips": "53061",
-            "county": "Snohomish",
-            "data": [
-            {
-            "date": "2020-02-29",
-            "cases": 2,
-            "deaths": 0
-            },
-            {
-            "date": "2020-03-01",
-            "cases": 3,
-            "deaths": 0
-            }
-            ]
-            }
+                {
+                    "state": "WI",
+                    "state_fips": "55",
+                    "data": [
+                        {
+                            "date": "2020-02-05",
+                            "cases": 1,
+                            "deaths": 0
+                        }
+                    ]
+                }
             ]
         </code>
 

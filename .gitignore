@@ -40,11 +40,9 @@
 /logs/
 
 # Password containing files
-/src/test/resources/
-/src/main/resources/
+# /src/test/resources/
+# /src/main/resources/
 /src/main/webapp/META-INF/context.xml
-/src/main/resources/hibernate.cfg.xml
-/src/test/resources/hibernate.cfg.xml
 /src/test/resources/database.properties
 /profiles/aws.properties
 /profiles/local.properties
