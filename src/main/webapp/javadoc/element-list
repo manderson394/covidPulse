@@ -1,0 +1,6 @@
+edu.matc.covidPulse
+edu.matc.covidPulse.controller
+edu.matc.covidPulse.entity
+edu.matc.covidPulse.persistence
+edu.matc.covidPulse.servlet
+edu.matc.covidPulse.transformer
