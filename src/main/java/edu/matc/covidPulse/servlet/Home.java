@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 @WebServlet(
-        urlPatterns = {"/"}
+        urlPatterns = {""}
 )
 
 public class Home extends HttpServlet {
