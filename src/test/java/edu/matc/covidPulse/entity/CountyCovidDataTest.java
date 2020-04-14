@@ -36,6 +36,14 @@ class CountyCovidDataTest {
     }
 
     /**
+     * Validates no argument constructor object creation.
+     */
+    @Test
+    void noArgsConstructorSuccess() {
+        assertNotNull(new CountyCovidData());
+    }
+
+    /**
      * Validates successful to string creation.
      */
     @Test
@@ -71,4 +79,116 @@ class CountyCovidDataTest {
         String expectedString = "CountyCovidData{id=1000, date=2020-01-21, fipsCode=CountyFips{fips='53061', name='Snohomish', state='WA'}, cases=1, deaths=0, countyName='Snohomish', state='Washington'}";
         assertEquals(expectedString, expectedCountyCovid.toString());
     }
+
+    /**
+     * Validates gets id successfully.
+     */
+    @Test
+    void getIdSuccess() {
+        assertEquals(1, expectedCountyCovid.getId());
+    }
+
+    /**
+     * Validates gets county name successfully.
+     */
+    @Test
+    void getCountyNameSuccess() {
+        assertEquals("Snohomish", expectedCountyCovid.getCountyName());
+    }
+
+    /**
+     * Validates sets county name successfully.
+     */
+    @Test
+    void setCountyNameSuccess() {
+        expectedCountyCovid.setCountyName("test");
+        assertEquals("test", expectedCountyCovid.getCountyName());
+    }
+
+    /**
+     * Validates gets state successfully.
+     */
+    @Test
+    void getStateSuccess() {
+        assertEquals("Washington", expectedCountyCovid.getState());
+    }
+
+    /**
+     * Validates sets state successfully.
+     */
+    @Test
+    void setStateSuccess() {
+        expectedCountyCovid.setState("AK");
+        assertEquals("AK", expectedCountyCovid.getState());
+    }
+
+    /**
+     * Validates gets date successfully.
+     */
+    @Test
+    void getDateSuccess() {
+        assertEquals(LocalDate.of(2020, 1, 21), expectedCountyCovid.getDate());
+    }
+
+    /**
+     * Validates sets date successfully.
+     */
+    @Test
+    void setDateSuccess() {
+        expectedCountyCovid.setDate(LocalDate.of(2020, 1, 22));
+        assertEquals(LocalDate.of(2020, 1, 22), expectedCountyCovid.getDate());
+    }
+
+    /**
+     * Validates gets fips code successfully.
+     */
+    @Test
+    void getFipsCodeSuccess() {
+        assertEquals(expectedFips, expectedCountyCovid.getFipsCode());
+    }
+
+    /**
+     * Validates sets fips code successfully.
+     */
+    @Test
+    void setFipsCodeSuccess() {
+        CountyFips newFips = new CountyFips("53331", "test", "WA", new HashSet<>());
+        expectedCountyCovid.setFipsCode(newFips);
+        assertEquals(newFips, expectedCountyCovid.getFipsCode());
+    }
+
+    /**
+     * Validates gets cases successfully.
+     */
+    @Test
+    void getCasesSuccess() {
+        assertEquals(1, expectedCountyCovid.getCases());
+    }
+
+    /**
+     * Validates sets cases successfully.
+     */
+    @Test
+    void setCasesSuccess() {
+        expectedCountyCovid.setCases(3);
+        assertEquals(3, expectedCountyCovid.getCases());
+    }
+
+    /**
+     * Validates gets deaths successfully.
+     */
+    @Test
+    void getDeathsSuccess() {
+        assertEquals(0, expectedCountyCovid.getDeaths());
+    }
+
+    /**
+     * Validates sets deaths successfully.
+     */
+    @Test
+    void setDeathsSuccess() {
+        expectedCountyCovid.setDeaths(44);
+        assertEquals(44, expectedCountyCovid.getDeaths());
+    }
+
 }

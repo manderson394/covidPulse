@@ -38,7 +38,7 @@
 
 # Log files
 /logs/
-/src/main/resources/log4j2.properties
+#/src/main/resources/log4j2.properties
 /src/test/resources/log4j2.properties
 
 # Password containing files
@@ -67,3 +67,5 @@ fabric.properties
 .factorypath
 .project
 .settings/
+
+bin/

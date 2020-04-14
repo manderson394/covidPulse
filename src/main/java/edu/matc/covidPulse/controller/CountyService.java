@@ -10,12 +10,14 @@ import edu.matc.covidPulse.transformer.CountyDataTransformer;
 import lombok.extern.log4j.Log4j2;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Generates end points to access county related data from the Covid Pulse database.
+ */
 @Log4j2
 @Path("/counties")
 public class CountyService {
@@ -25,11 +27,21 @@ public class CountyService {
     private String response;
     private int status;
 
+    /**
+     * Instantiates a new County service.
+     */
     public CountyService() {
         countyCovidDao = new GenericDao<>(CountyCovidData.class);
         mapper = new ObjectMapper();
     }
 
+    /**
+     * Gets all counties data.
+     *
+     * @param startDate the start date
+     * @param endDate   the end date
+     * @return the all counties data
+     */
     @GET
     @Produces("application/json")
     public Response getAllCountiesData(
@@ -56,6 +68,14 @@ public class CountyService {
         return Response.status(status).entity(response).build();
     }
 
+    /**
+     * Gets county data for a single county.
+     *
+     * @param countyFipsCode the county fips code
+     * @param startDate      the start date
+     * @param endDate        the end date
+     * @return the county data
+     */
     @GET
     @Path("/{countyFipsCode}")
     @Produces("application/json")

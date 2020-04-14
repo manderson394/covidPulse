@@ -78,4 +78,75 @@ class CountyFipsTest {
         assertEquals(expectedCountyFips.hashCode(), expectedCountyFips.hashCode());
         assertNotEquals(newCountyFips.hashCode(), expectedCountyFips.hashCode());
     }
+
+    /**
+     * Validates gets fips successfully.
+     */
+    @Test
+    void getFipsSuccess() {
+        assertEquals("01001", expectedCountyFips.getFips());
+    }
+
+    /**
+     * Validates sets fips successfully.
+     */
+    @Test
+    void setFipsSuccess() {
+        expectedCountyFips.setFips("99999");
+        assertEquals("99999", expectedCountyFips.getFips());
+    }
+
+    /**
+     * Validates gets name successfully.
+     */
+    @Test
+    void getNameSuccess() {
+        assertEquals("Autauga", expectedCountyFips.getName());
+    }
+
+    /**
+     * Validates sets name successfully.
+     */
+    @Test
+    void setNameSuccess() {
+        expectedCountyFips.setName("test");
+        assertEquals("test", expectedCountyFips.getName());
+    }
+
+    /**
+     * Validates gets state successfully.
+     */
+    @Test
+    void getStateSuccess() {
+        assertEquals("AL", expectedCountyFips.getState());
+    }
+
+    /**
+     * Validates sets state successfully.
+     */
+    @Test
+    void setStateSuccess() {
+        expectedCountyFips.setState("WA");
+        assertEquals("WA", expectedCountyFips.getState());
+    }
+
+    /**
+     * Validates gets covid data set successfully.
+     */
+    @Test
+    void getCovidDataSetSuccess() {
+        assertEquals(0, expectedCountyFips.getCovidDataSet().size());
+    }
+
+    /**
+     * Validates sets covid data set successfully.
+     */
+    @Test
+    void setCovidDataSetSuccess() {
+        HashSet<CountyCovidData> newSet = new HashSet<>();
+        CountyCovidData covidData = new CountyCovidData();
+        newSet.add(covidData);
+        expectedCountyFips.setCovidDataSet(newSet);
+        assertEquals(1, expectedCountyFips.getCovidDataSet().size());
+    }
 }
