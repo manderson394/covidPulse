@@ -27,12 +27,12 @@ class CountyCovidDataTest {
 
         expectedFips = new CountyFips("53061", "Snohomish", "WA", new HashSet<>());
 
-        expectedCountyCovid = new CountyCovidData(1, LocalDate.of(2020, 1, 21),
+        expectedCountyCovid = new CountyCovidData(1, "2020-01-21",
                 expectedFips, 1, 0, "Snohomish", "Washington");
         expectedFips.addCountyCovidData(expectedCountyCovid);
 
         newCountyCovid = new CountyCovidData(999999999,
-                LocalDate.of(2020, 12, 23), expectedFips, 23, 23, "Test County", "Not a State");
+                "2020-12-23", expectedFips, 23, 23, "Test County", "Not a State");
     }
 
     /**
@@ -127,7 +127,7 @@ class CountyCovidDataTest {
      */
     @Test
     void getDateSuccess() {
-        assertEquals(LocalDate.of(2020, 1, 21), expectedCountyCovid.getDate());
+        assertEquals("2020-01-21", expectedCountyCovid.getDate());
     }
 
     /**
@@ -135,8 +135,8 @@ class CountyCovidDataTest {
      */
     @Test
     void setDateSuccess() {
-        expectedCountyCovid.setDate(LocalDate.of(2020, 1, 22));
-        assertEquals(LocalDate.of(2020, 1, 22), expectedCountyCovid.getDate());
+        expectedCountyCovid.setDate("2020-01-22");
+        assertEquals("2020-01-22", expectedCountyCovid.getDate());
     }
 
     /**

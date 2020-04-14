@@ -12,8 +12,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Converts a List of database records into the data structure that can be mapped to our JSON response,
+ * Which is a List of individual response objects (each of which represents the data for a particular state),
+ */
 @Log4j2
 public class StateDataTransformer {
+    /**
+     * Main transformation method.
+     *
+     * @param stateCovidRecords the state covid records
+     * @return the list
+     */
     public static List<StateResponse> from(List<StateCovidRecord> stateCovidRecords) {
         Map<String, StateResponse> responseItems = mapRecordsToStateResponseItems(stateCovidRecords);
 
@@ -58,7 +68,7 @@ public class StateDataTransformer {
 
     private static StateDataItem generateDataItem(StateCovidRecord record) {
         StateDataItem dataItem = new StateDataItem();
-        dataItem.setDate(record.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        dataItem.setDate(record.getDate());
         dataItem.setCases(record.getCases());
         dataItem.setDeaths(record.getDeaths());
         return dataItem;

@@ -34,7 +34,7 @@ class CountyDataTransformerTest {
     @BeforeEach
     void setUp() {
         fips = new CountyFips("01001", "TestName", "AL", new HashSet<>());
-        data = new CountyCovidData(1, LocalDate.of(2020, 1, 21), fips,
+        data = new CountyCovidData(1, "2020-01-21", fips,
                 2, 1, "TestName", "TestState");
         covidDataList.add(data);
 

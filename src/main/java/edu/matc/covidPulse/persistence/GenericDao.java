@@ -154,14 +154,14 @@ public class GenericDao<T> {
      * @param upperBound    the upper bound
      * @return the by range
      */
-    public List<T> getByRange(String rangeProperty, LocalDate lowerBound, LocalDate upperBound) {
+    public List<T> getByRange(String rangeProperty, String lowerBound, String upperBound) {
         Session session = sessionFactory.openSession();
         logger.debug("Searching on {} with bounds on {}: Lower: {}, Upper: {}.", type,
                 rangeProperty, lowerBound, upperBound);
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);
-        Expression<LocalDate> rangePropertyPath = root.get(rangeProperty);
+        Expression<String> rangePropertyPath = root.get(rangeProperty);
         query.where(builder.between(rangePropertyPath, lowerBound, upperBound));
         List<T> entities = session.createQuery( query ).getResultList();
         session.close();
@@ -178,14 +178,14 @@ public class GenericDao<T> {
      * @param valueTwo      the value two
      * @return the by range two param
      */
-    public List<T> getByRangeTwoParam(String rangeProperty, LocalDate lowerBound, LocalDate upperBound, String propertyTwo, Object valueTwo) {
+    public List<T> getByRangeTwoParam(String rangeProperty, String lowerBound, String upperBound, String propertyTwo, Object valueTwo) {
         Session session = sessionFactory.openSession();
         logger.debug("Searching on {} with bounds on {}: Lower: {}, Upper: {}, & {} equal to {}.", type,
                 rangeProperty, lowerBound, upperBound, propertyTwo, valueTwo);
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);
-        Expression<LocalDate> rangePropertyPath = root.get(rangeProperty);
+        Expression<String> rangePropertyPath = root.get(rangeProperty);
         Expression<String> propertyTwoPath = root.get(propertyTwo);
         query.where(builder.between(rangePropertyPath, lowerBound, upperBound),
                 builder.equal(propertyTwoPath, valueTwo));
