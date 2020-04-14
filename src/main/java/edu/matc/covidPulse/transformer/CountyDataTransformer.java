@@ -10,15 +10,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Transforms a <code>CountyCovidData</code> object into the appropriate <code>CountyResponse</code> object.
+ * @author Matt Anderson, Kevin Klemm, Nate Elliot
+ * @version 11
+ */
 public class CountyDataTransformer {
 
+    /**
+     * Converts a list of <code>CountyCovidData</code> objects to a list of <code>CountyResponse</code> objects;
+     *
+     * @param countyCovidDataList the county covid data list
+     * @return the list
+     */
     public static List<CountyResponse> convertFrom(List<CountyCovidData> countyCovidDataList) {
         Map<String, CountyResponse> responseMap = generateCountyResponse(countyCovidDataList);
 
         return convertMapToList(responseMap);
     }
 
-    public static Map<String, CountyResponse> generateCountyResponse(List<CountyCovidData> countyDataList) {
+    private static Map<String, CountyResponse> generateCountyResponse(List<CountyCovidData> countyDataList) {
         Map<String, CountyResponse> map = new HashMap<>();
 
         for (CountyCovidData data : countyDataList) {
@@ -40,7 +51,7 @@ public class CountyDataTransformer {
 
     }
 
-    public static CountyDataItem createCountyDataItem(CountyCovidData countyData) {
+    private static CountyDataItem createCountyDataItem(CountyCovidData countyData) {
         CountyDataItem newItem =
                 new CountyDataItem(countyData.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE), countyData.getCases(),
                         countyData.getDeaths());
@@ -48,13 +59,13 @@ public class CountyDataTransformer {
         return newItem;
     }
 
-    public static void addCountyDataItemToMap(CountyDataItem dataItem, CountyResponse responseItem) {
+    private static void addCountyDataItemToMap(CountyDataItem dataItem, CountyResponse responseItem) {
         List<CountyDataItem> countyDataList = responseItem.getCountyData();
         countyDataList.add(dataItem);
         responseItem.setCountyData(countyDataList);
     }
 
-    public static List<CountyResponse> convertMapToList(Map<String, CountyResponse> inputMap) {
+    private static List<CountyResponse> convertMapToList(Map<String, CountyResponse> inputMap) {
         ArrayList<CountyResponse> resultList = new ArrayList<>();
 
         for(Map.Entry<String, CountyResponse> mapItem : inputMap.entrySet()) {

@@ -5,7 +5,6 @@ import edu.matc.covidPulse.test.util.Database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.persistence.PersistenceException;
 import java.util.HashSet;
 import java.util.List;
 

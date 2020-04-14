@@ -47,6 +47,12 @@ class CountyCovidDataDaoTest {
 
     }
 
+    @Test
+    void getAllSuccess() {
+        List<CountyCovidData> countyCovidData = countyCovidDao.getAll();
+        assertEquals(373, countyCovidData.size());
+    }
+
     /**
      * Validates the get by property value is successful.
      */
