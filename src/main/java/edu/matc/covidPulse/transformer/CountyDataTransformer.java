@@ -53,7 +53,7 @@ public class CountyDataTransformer {
 
     private static CountyDataItem createCountyDataItem(CountyCovidData countyData) {
         CountyDataItem newItem =
-                new CountyDataItem(countyData.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE), countyData.getCases(),
+                new CountyDataItem(countyData.getDate(), countyData.getCases(),
                         countyData.getDeaths());
 
         return newItem;

@@ -104,22 +104,22 @@ public class CountyService {
     }
 
     private List<CountyCovidData> getCountyResults(String fipsCode, String start, String end) {
-        LocalDate startDateTime = null;
-        LocalDate endDateTime = null;
-
-        if ((start != null) && (end != null)) {
-            startDateTime = convertToLocalDateTime(start);
-            endDateTime = convertToLocalDateTime(end);
-        }
+//        LocalDate startDateTime = null;
+//        LocalDate endDateTime = null;
+//
+//        if ((start != null) && (end != null)) {
+//            startDateTime = convertToLocalDateTime(start);
+//            endDateTime = convertToLocalDateTime(end);
+//        }
 
         if (fipsCode.isEmpty()) {
-            return getAllFips(startDateTime, endDateTime);
+            return getAllFips(start, end);
         } else {
-            return getOneFips(fipsCode, startDateTime, endDateTime);
+            return getOneFips(fipsCode, start, end);
         }
     }
 
-    private List<CountyCovidData> getAllFips(LocalDate startDT, LocalDate endDT) {
+    private List<CountyCovidData> getAllFips(String startDT, String endDT) {
         if ((startDT != null) && (endDT != null)) {
             return countyCovidDao.getByRange("date", startDT, endDT);
         } else {
@@ -127,7 +127,7 @@ public class CountyService {
         }
     }
 
-    private List<CountyCovidData> getOneFips(String fips, LocalDate startDT, LocalDate endDT) {
+    private List<CountyCovidData> getOneFips(String fips, String startDT, String endDT) {
         GenericDao<CountyFips> fipsDao = new GenericDao<>(CountyFips.class);
         List<CountyFips> fipsList = fipsDao.getByPropertyEqual("fips", fips);
 

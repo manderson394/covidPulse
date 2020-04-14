@@ -25,7 +25,7 @@ public class CountyCovidData {
     private int id;
 
     @NotNull
-    private LocalDate date;
+    private String date;
 
     @NotNull
     @ManyToOne

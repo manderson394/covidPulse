@@ -10,12 +10,13 @@ import lombok.extern.log4j.Log4j2;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.LogManager;
 
+/**
+ * The type State service.
+ */
 @Log4j2
 @Path("/states")
 public class StateService {
@@ -23,10 +24,20 @@ public class StateService {
     private int status;
     private ObjectMapper mapper = new ObjectMapper();
 
+    /**
+     * Instantiates a new State service.
+     */
     public StateService() {
         dao = new GenericDao(StateCovidRecord.class);
     }
 
+    /**
+     * Gets all states data.
+     *
+     * @param startDate the start date
+     * @param endDate   the end date
+     * @return the all states data
+     */
     @GET
     @Produces("application/json")
     public Response getAllStatesData(@QueryParam("startDate") String startDate, @QueryParam("endDate") String endDate) {
@@ -34,7 +45,7 @@ public class StateService {
         if (startDate != null && endDate != null) {
             // restrict data returned by date range
             DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-            data = dao.getByRange("date", LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter));
+            data = dao.getByRange("date", startDate, endDate);
         } else {
             data = dao.getAll();
         }
@@ -55,6 +66,14 @@ public class StateService {
         return Response.status(status).entity(responseBody).build();
     }
 
+    /**
+     * Gets one state data.
+     *
+     * @param state     the state
+     * @param startDate the start date
+     * @param endDate   the end date
+     * @return the one state data
+     */
     @GET
     @Path("/{state}")
     @Produces("application/json")
@@ -63,7 +82,7 @@ public class StateService {
         if (startDate != null && endDate != null) {
             // restrict data by date range
             DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-            data = dao.getByRangeTwoParam("date", LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), "state", state);
+            data = dao.getByRangeTwoParam("date", startDate, endDate, "state", state);
         } else {
             data = dao.getByPropertyLike("state", state);
         }

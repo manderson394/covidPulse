@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `COUNTY_COVID_DATA`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `COUNTY_COVID_DATA` (
-                                     `date` date NOT NULL,
+                                     `date` varchar(10) NOT NULL,
                                      `county_fips_code` char(5) NOT NULL,
                                      `cases` int NOT NULL,
                                      `deaths` int NOT NULL,
@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `STATE_COVID_DATA`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `STATE_COVID_DATA` (
                                     `id` int NOT NULL AUTO_INCREMENT,
-                                    `date` date NOT NULL,
+                                    `date` varchar(10) NOT NULL,
                                     `state` char(2) NOT NULL,
                                     `cases` int NOT NULL,
                                     `deaths` int NOT NULL,

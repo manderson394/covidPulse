@@ -27,7 +27,7 @@ class CountyFipsTest {
 
         expectedCountyFips = new CountyFips("01001", "Autauga", "AL", new HashSet<>());
 
-        expectedCountyCovid = new CountyCovidData(1, LocalDate.of(2020, 1, 21),
+        expectedCountyCovid = new CountyCovidData(1, "2020-01-21",
                 expectedCountyFips, 1, 0, "Snohomish", "Washington");
 
         newCountyFips = new CountyFips("11111", "Tester", "NA", new HashSet<>());
