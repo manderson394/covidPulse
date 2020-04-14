@@ -38,11 +38,14 @@
 
 # Log files
 /logs/
+/src/main/resources/log4j2.properties
+/src/test/resources/log4j2.properties
 
 # Password containing files
 /src/test/resources/api.properties
 /src/main/resources/api.properties
 /src/main/webapp/META-INF/context.xml
+/src/main/resources/hibernate.cfg.xml
 /src/test/resources/hibernate.cfg.xml
 /src/test/resources/database.properties
 /profiles/aws.properties
@@ -59,3 +62,10 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+.classpath
+.factorypath
+.project
+.settings/
+
+bin/
