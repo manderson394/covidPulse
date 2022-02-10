@@ -24,7 +24,7 @@
       <junit-platform-runner-version>1.0.0</junit-platform-runner-version>
       <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
       <maven-surefire-plugin-version>2.19</maven-surefire-plugin-version>
-      <hibernate-version>5.4.4.Final</hibernate-version>
+      <hibernate-version>5.4.24.Final</hibernate-version>
       <hibernate-validator-version>5.4.2.Final</hibernate-validator-version>
       <hibernate-validator-annotation-processor-version>6.1.2.Final</hibernate-validator-annotation-processor-version>
       <lombok-version>1.18.12</lombok-version>
